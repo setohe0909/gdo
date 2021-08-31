@@ -49,3 +49,9 @@ export const InputCustom = styled.input`
   border-radius: 4px;
   padding: 5px;
 `;
+
+export const ErrorMSg = styled.span`
+  color: #9e1717;
+  position: absolute;
+  font-weight: 600;
+`;

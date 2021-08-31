@@ -40,7 +40,7 @@ export const Footer = styled.div`
 const App = () => {
   return (
     <Router>
-      <Header>Header</Header>
+      <Header>GDO</Header>
       <MainLayout>
         <Switch>
           <Route exact path={routes.MAIN} component={MainContainer} />
