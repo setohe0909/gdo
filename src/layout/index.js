@@ -1,10 +1,13 @@
 import React from "react";
-import { Containermain } from "./styles";
+import { Containermain, Content, Output } from "./styles";
 
 const MainLayout = ({ children }) => {
   return (
     <Containermain className="test">
-      <div>{children}</div>
+      <Content>
+        {children}
+        <Output>output</Output>
+      </Content>
     </Containermain>
   );
 };

@@ -4,16 +4,32 @@ import colors from "../colors";
 
 export const Containermain = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   font-family: "Montserrat", sans-serif;
   background: ${colors.white};
-  /*box-shadow: top left bottom rigth*/
-  box-shadow: 2px 2px 4px 4px ${colors.silverChalice};
+  box-shadow: 2px 2px 24px -6px ${colors.silverChalice};
   right: 200px;
-  flex-wrap: wrap;
   border-radius: 8px;
   padding: 1em;
   width: 80%;
   height: 28em;
   margin: 40px auto;
   padding: 30px;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const Output = styled.div`
+  width: 50%;
+  background: #d8dcd6;
+  height: 90%;
+  padding: 10px;
+  border-radius: 8px;
 `;

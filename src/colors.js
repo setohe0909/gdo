@@ -10,7 +10,7 @@ const colors = {
   orange: "#FF7F11",
   kindliestYellowOrange: "#FCB001",
   prewarBattleshipGrey: "#6B7C85",
-  naturalNightBlue: "#040348",
+  naturalNightBlue: "#4b4d9f",
   bonJour: "#ECEBEC",
   silverChalice: "#A7A5A5",
 };
