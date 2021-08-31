@@ -11,7 +11,6 @@ import MainLayout from "./layout";
 const App = () => {
   return (
     <Router>
-      
       <MainLayout>
         <Switch>
           <Route exact path={routes.MAIN} component={MainContainer} />

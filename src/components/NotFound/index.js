@@ -1,12 +1,9 @@
 import React from "react";
 
-
 const NotFound = () => {
   return (
     <>
-    <span>
-      no hay nada
-    </span>
+      <span>no hay nada</span>
     </>
   );
 };
