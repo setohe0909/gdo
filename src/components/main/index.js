@@ -44,9 +44,7 @@ const MainContainer = ({ history }) => {
     e.preventDefault()
     const number = +e.target.value
 
-    const isValid = /^(\d+)$|^(\d+\.{2}\d{2})$/
-    
-    if (!isValid.test(number)) {
+    if (number >= 0) {
       setIsError(false)
       setMessage('')
       func(e.target.value)
