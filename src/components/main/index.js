@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router";
+import React, { useState } from 'react'
+import { withRouter } from 'react-router'
 
 import {
   Divweight,
@@ -9,16 +9,16 @@ import {
   Divinput4,
   Btnresult,
   InputCustom,
-  ErrorMSg,
-} from "./styles";
+  ErrorMSg
+} from './styles'
 
 const MainContainer = ({ history }) => {
-  const [grossWeight, setGrossWeight] = useState("");
-  const [law, setLaw] = useState("");
-  const [fine, setFine] = useState("");
-  const [initWeight, setInitWeight] = useState("");
-  const [lastWeight, setLastWeight] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [grossWeight, setGrossWeight] = useState('')
+  const [law, setLaw] = useState('')
+  const [fine, setFine] = useState('')
+  const [initWeight, setInitWeight] = useState('')
+  const [lastWeight, setLastWeight] = useState('')
+  const [isError, setIsError] = useState(false)
 
   // const search = (url) => {
   //   history.push(url);
@@ -26,35 +26,35 @@ const MainContainer = ({ history }) => {
 
   const validate = () => {
     if (
-      grossWeight === "" &&
-      law === "" &&
-      fine === "" &&
-      initWeight === "" &&
-      lastWeight === ""
+      grossWeight === '' &&
+      law === '' &&
+      fine === '' &&
+      initWeight === '' &&
+      lastWeight === ''
     ) {
-      setIsError(true);
+      setIsError(true)
     } else {
-      setIsError(false);
+      setIsError(false)
     }
-  };
+  }
 
   return (
     <div>
       {isError ? (
         <ErrorMSg>Todos los campos son obligatorios</ErrorMSg>
       ) : (
-        "Campos diligenciados"
+        'Campos diligenciados'
       )}
       <div>
         <h1>Material</h1>
-        <div className="container">
+        <div className='container'>
           <Divweight>
             <label>Peso Bruto:</label>
             <Divinput1>
               <InputCustom
-                onChange={(e) => setGrossWeight(e.target.value)}
-                type="number"
-                placeholder="Ingrese el Peso Bruto"
+                onChange={e => setGrossWeight(e.target.value)}
+                type='number'
+                placeholder='Ingrese el Peso Bruto'
               />
             </Divinput1>
           </Divweight>
@@ -62,9 +62,9 @@ const MainContainer = ({ history }) => {
             <label>Ley:</label>
             <Divinput2>
               <InputCustom
-                onChange={(e) => setLaw(e.target.value)}
-                type="number"
-                placeholder="Ingrese Ley"
+                onChange={e => setLaw(e.target.value)}
+                type='number'
+                placeholder='Ingrese Ley'
               />
             </Divinput2>
           </Divweight>
@@ -72,9 +72,9 @@ const MainContainer = ({ history }) => {
             <label>Finos:</label>
             <Divinput3>
               <InputCustom
-                onChange={(e) => setFine(e.target.value)}
-                type="number"
-                placeholder="Ingrese finos"
+                onChange={e => setFine(e.target.value)}
+                type='number'
+                placeholder='Ingrese finos'
               />
             </Divinput3>
           </Divweight>
@@ -83,14 +83,14 @@ const MainContainer = ({ history }) => {
 
       <div>
         <h1>Rango de peso</h1>
-        <div className="container">
+        <div className='container'>
           <Divweight>
             <label>Peso inicial:</label>
             <Divinput1>
               <InputCustom
-                onChange={(e) => setInitWeight(e.target.value)}
-                type="number"
-                placeholder="Ingrese el Peso Bruto"
+                onChange={e => setInitWeight(e.target.value)}
+                type='number'
+                placeholder='Ingrese el Peso Bruto'
               />
             </Divinput1>
           </Divweight>
@@ -98,19 +98,19 @@ const MainContainer = ({ history }) => {
             <label>Peso final: </label>
             <Divinput4>
               <InputCustom
-                onChange={(e) => setLastWeight(e.target.value)}
-                type="number"
-                placeholder="Ingrese Ley"
+                onChange={e => setLastWeight(e.target.value)}
+                type='number'
+                placeholder='Ingrese Ley'
               />
             </Divinput4>
           </Divweight>
         </div>
       </div>
-      <Btnresult type="button" onClick={() => validate()}>
+      <Btnresult type='button' onClick={() => validate()}>
         Obtener resultados
       </Btnresult>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(MainContainer);
+export default withRouter(MainContainer)
