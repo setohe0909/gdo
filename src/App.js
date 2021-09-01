@@ -14,14 +14,14 @@ import MainLayout from './layout'
 const App = () => {
   return (
     <Router>
-      <Header/>
+      <Header />
       <MainLayout>
         <Switch>
           <Route exact path={routes.MAIN} component={MainContainer} />
           <Route component={NotFound} />
         </Switch>
       </MainLayout>
-      <Footerone/>
+      <Footerone />
     </Router>
   )
 }
