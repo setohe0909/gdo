@@ -19,6 +19,7 @@ const MainContainer = ({ history }) => {
   const [initWeight, setInitWeight] = useState('')
   const [lastWeight, setLastWeight] = useState('')
   const [isError, setIsError] = useState(false)
+  const [message, setMessage] = useState('')
 
   // const search = (url) => {
   //   history.push(url);
@@ -33,15 +34,30 @@ const MainContainer = ({ history }) => {
       lastWeight === ''
     ) {
       setIsError(true)
+      setMessage('Todos los campos son obligatorios')
     } else {
       setIsError(false)
+    }
+  }
+
+  const inputFl = (e, func) => {
+    e.preventDefault()
+    const number = +e.target.value
+
+    if (number >= 0) {
+      setIsError(false)
+      setMessage('')
+      func(e.target.value)
+    } else {
+      setIsError(true)
+      setMessage('Formato no válido')
     }
   }
 
   return (
     <div>
       {isError ? (
-        <ErrorMSg>Todos los campos son obligatorios</ErrorMSg>
+        <ErrorMSg>{message}</ErrorMSg>
       ) : (
         'Campos diligenciados'
       )}
@@ -52,7 +68,7 @@ const MainContainer = ({ history }) => {
             <label>Peso Bruto:</label>
             <Divinput1>
               <InputCustom
-                onChange={e => setGrossWeight(e.target.value)}
+                onChange={e => inputFl(e, setGrossWeight)}
                 type='number'
                 placeholder='Ingrese el Peso Bruto'
               />
@@ -62,7 +78,7 @@ const MainContainer = ({ history }) => {
             <label>Ley:</label>
             <Divinput2>
               <InputCustom
-                onChange={e => setLaw(e.target.value)}
+                onChange={e => inputFl(e, setLaw)}
                 type='number'
                 placeholder='Ingrese Ley'
               />
@@ -72,7 +88,7 @@ const MainContainer = ({ history }) => {
             <label>Finos:</label>
             <Divinput3>
               <InputCustom
-                onChange={e => setFine(e.target.value)}
+                onChange={e => inputFl(e, setFine)}
                 type='number'
                 placeholder='Ingrese finos'
               />
@@ -88,7 +104,7 @@ const MainContainer = ({ history }) => {
             <label>Peso inicial:</label>
             <Divinput1>
               <InputCustom
-                onChange={e => setInitWeight(e.target.value)}
+                onChange={e => inputFl(e, setInitWeight)}
                 type='number'
                 placeholder='Ingrese el Peso Bruto'
               />
@@ -98,7 +114,7 @@ const MainContainer = ({ history }) => {
             <label>Peso final: </label>
             <Divinput4>
               <InputCustom
-                onChange={e => setLastWeight(e.target.value)}
+                onChange={e => inputFl(e, setLastWeight)}
                 type='number'
                 placeholder='Ingrese Ley'
               />
