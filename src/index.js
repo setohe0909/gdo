@@ -4,11 +4,20 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
+import firebaseConfig from "./firebase-config";
+import{
+  FirebaseAppProvider
+} from 'reactfire'
+import { Suspense } from "react";
 
 ReactDOM.render(
+  <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <Suspense>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Suspense>
+  </FirebaseAppProvider>,
   document.getElementById("root")
 );
 
