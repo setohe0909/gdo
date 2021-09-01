@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import colors from "../../colors";
 
 export const Footer = styled.div`
@@ -6,7 +7,7 @@ export const Footer = styled.div`
   height: 80px;
   background: ${colors.mineShaft};
   font-size: 20px;
-  color: white;
+  color: ${colors.white};
   width: 100%;
   display: flex;
   align-items: center;

@@ -1,7 +1,12 @@
 import React from 'react'
-import {Footer} from "./styles";
+import { Footer } from './styles'
 
+const Footerone = () => {
+  return (
+    <Footer>
+      <strong>Footer</strong>
+    </Footer>
+  )
+}
 
-<Footer>
-        <strong>Footer</strong>
-      </Footer>
+export default Footerone

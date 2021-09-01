@@ -15,6 +15,8 @@ const colors = {
   silverChalice: '#A7A5A5',
   mineShaft: '#242323',
   sanMarino: '#3b719f',
+  whiteDark: '#d8dcd6',
+  redDark: '#9e1717'
 }
 
 export default colors

@@ -1,6 +1,9 @@
 import React from 'react'
 
-import {Header} from "./styles";
+import { Header1 } from './styles'
 
+const Header = () => {
+  return <Header1>GDO</Header1>
+}
 
-<Header>GDO</Header>
+export default Header
