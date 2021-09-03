@@ -1,15 +1,17 @@
-import React from "react";
-import { Containermain, Content, Output } from "./styles";
+import React from 'react'
+import { Containermain, Content} from './styles'
+
+import Output from '../components/output'
 
 const MainLayout = ({ children }) => {
   return (
-    <Containermain className="test">
+    <Containermain className='test'>
       <Content>
         {children}
-        <Output>output</Output>
+        <Output />
       </Content>
     </Containermain>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

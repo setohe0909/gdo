@@ -14,5 +14,9 @@ export const Footer = styled.div`
 
   strong {
     margin-left: 20px;
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;

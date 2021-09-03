@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
+import { ToastContainer, toast } from 'react-toastify'
 
 import {
   Divweight,
@@ -9,35 +10,65 @@ import {
   Divinput4,
   Btnresult,
   InputCustom,
-  ErrorMSg
 } from './styles'
+import 'react-toastify/dist/ReactToastify.css'
 
-const MainContainer = ({ history }) => {
+const MainContainer = () => {
   const [grossWeight, setGrossWeight] = useState('')
   const [law, setLaw] = useState('')
   const [fine, setFine] = useState('')
   const [initWeight, setInitWeight] = useState('')
   const [lastWeight, setLastWeight] = useState('')
-  const [isError, setIsError] = useState(false)
-  const [message, setMessage] = useState('')
+  const [range, setRange] = useState(0)
 
-  // const search = (url) => {
-  //   history.push(url);
-  // };
+  const randomBetween = (min, max) => {
+    if (min < 0) {
+      return min + Math.random() * (Math.abs(min) + max)
+    } else {
+      return min + Math.random() * max
+    }
+  }
 
   const validate = () => {
     if (
       grossWeight === '' &&
       law === '' &&
-      fine === '' &&
+      fine === 0 &&
       initWeight === '' &&
-      lastWeight === ''
+      lastWeight === '' &&
+      range === 0
     ) {
-      setIsError(true)
-      setMessage('Todos los campos son obligatorios')
+      toast.error('Todos los campos son obligatorios', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     } else {
-      setIsError(false)
+      const divideRange = grossWeight / initWeight
+      let outputArray = new Array(Math.round(divideRange)).fill('')
+
+      outputArray = outputArray.map((_item, index) => {
+        const gr = randomBetween(initWeight, lastWeight)
+        const law = randomBetween(0.000, 0.999)
+        debugger
+
+        return {
+          id: index + 1,
+          gr: parseInt(gr).toFixed(2),
+          law: parseInt(law).toFixed(2),
+          fine: (gr * law)
+        }
+      })
+
+      localStorage.setItem("result", JSON.stringify(outputArray));
+
     }
+
+    return
   }
 
   const inputFl = (e, func) => {
@@ -45,22 +76,27 @@ const MainContainer = ({ history }) => {
     const number = +e.target.value
 
     if (number >= 0) {
-      setIsError(false)
-      setMessage('')
       func(e.target.value)
     } else {
-      setIsError(true)
-      setMessage('Formato no válido')
+      toast.error('Formato no válido', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }
 
+  useEffect(() => {
+    const result = grossWeight * law
+    setFine(result)
+  }, [grossWeight, law])
+
   return (
     <div>
-      {isError ? (
-        <ErrorMSg>{message}</ErrorMSg>
-      ) : (
-        'Campos diligenciados'
-      )}
       <div>
         <h1>Material</h1>
         <div className='container'>
@@ -88,7 +124,8 @@ const MainContainer = ({ history }) => {
             <label>Finos:</label>
             <Divinput3>
               <InputCustom
-                onChange={e => inputFl(e, setFine)}
+                value={fine}
+                disabled
                 type='number'
                 placeholder='Ingrese finos'
               />
@@ -120,11 +157,26 @@ const MainContainer = ({ history }) => {
               />
             </Divinput4>
           </Divweight>
+          <Divweight>
+            <label>Rango de Ley 998: </label>
+            <Divinput4>
+              <InputCustom
+                onChange={e => inputFl(e, setRange)}
+                type='range'
+                min='0'
+                max='1'
+                step='0.25'
+              />
+              {range}
+            </Divinput4>
+          </Divweight>
         </div>
       </div>
       <Btnresult type='button' onClick={() => validate()}>
         Obtener resultados
       </Btnresult>
+
+      <ToastContainer />
     </div>
   )
 }

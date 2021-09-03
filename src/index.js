@@ -8,6 +8,7 @@ import {firebaseConfig} from './firebase-config'
 import { FirebaseAppProvider } from 'reactfire'
 import { Suspense } from 'react'
 
+
 ReactDOM.render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
     <Suspense>

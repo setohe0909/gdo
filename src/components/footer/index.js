@@ -4,7 +4,7 @@ import { Footer } from './styles'
 const Footerone = () => {
   return (
     <Footer>
-      <strong>Footer</strong>
+      <strong>Vokzen S.A.S</strong>
     </Footer>
   )
 }
