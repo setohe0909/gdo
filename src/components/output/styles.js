@@ -1,14 +1,26 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-import colors from '../../colors'
+import colors from '../../colors';
 
-export const Output = styled.div`
+export const EmptyState = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 16vh auto;
+  text-align: center;
+  font-weight: 600;
+`;
+
+export const OutputStl = styled.div`
   width: 50%;
   background: ${colors.whiteDark};
-  height: 90%;
+  height: 80%;
+  margin-top: 20px;
   padding: 10px;
   border-radius: 8px;
-`
+`;
 
 export const Container = styled.div`
   padding: 1rem;
@@ -48,4 +60,4 @@ export const Container = styled.div`
   .pagination {
     padding: 0.5rem;
   }
-`
+`;

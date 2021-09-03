@@ -1,3 +1,3 @@
-import grAtom from './grAtom';
+import { grAtom } from './grAtom';
 
 export { grAtom };

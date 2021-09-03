@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router'
-import { ToastContainer, toast } from 'react-toastify'
+import React, { useState, useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { withRouter } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
+
+import { grAtom } from '../../atoms';
 
 import {
   Divweight,
@@ -10,24 +13,26 @@ import {
   Divinput4,
   Btnresult,
   InputCustom,
-} from './styles'
-import 'react-toastify/dist/ReactToastify.css'
+} from './styles';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainContainer = () => {
-  const [grossWeight, setGrossWeight] = useState('')
-  const [law, setLaw] = useState('')
-  const [fine, setFine] = useState('')
-  const [initWeight, setInitWeight] = useState('')
-  const [lastWeight, setLastWeight] = useState('')
-  const [range, setRange] = useState(0)
+  const [grossWeight, setGrossWeight] = useState('');
+  const [law, setLaw] = useState('');
+  const [fine, setFine] = useState('');
+  const [initWeight, setInitWeight] = useState('');
+  const [lastWeight, setLastWeight] = useState('');
+  const [range, setRange] = useState(0);
+
+  const [, setdDtaInfo] = useAtom(grAtom.dataInfo);
 
   const randomBetween = (min, max) => {
     if (min < 0) {
-      return min + Math.random() * (Math.abs(min) + max)
+      return min + Math.random() * (Math.abs(min) + max);
     } else {
-      return min + Math.random() * max
+      return min + Math.random() * max;
     }
-  }
+  };
 
   const validate = () => {
     if (
@@ -46,37 +51,35 @@ const MainContainer = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      })
+      });
     } else {
-      const divideRange = grossWeight / initWeight
-      let outputArray = new Array(Math.round(divideRange)).fill('')
+      const divideRange = grossWeight / initWeight;
+      let outputArray = new Array(Math.round(divideRange)).fill('');
 
       outputArray = outputArray.map((_item, index) => {
-        const gr = randomBetween(initWeight, lastWeight)
-        const law = randomBetween(0.000, 0.999)
-        debugger
+        const gr = randomBetween(initWeight, lastWeight);
+        const law = randomBetween(0.0, 0.999);
 
         return {
           id: index + 1,
           gr: parseInt(gr).toFixed(2),
           law: parseInt(law).toFixed(2),
-          fine: (gr * law)
-        }
-      })
+          fine: gr * law,
+        };
+      });
 
-      localStorage.setItem("result", JSON.stringify(outputArray));
-
+      setdDtaInfo(outputArray);
     }
 
-    return
-  }
+    return;
+  };
 
   const inputFl = (e, func) => {
-    e.preventDefault()
-    const number = +e.target.value
+    e.preventDefault();
+    const number = +e.target.value;
 
     if (number >= 0) {
-      func(e.target.value)
+      func(e.target.value);
     } else {
       toast.error('Formato no válido', {
         position: 'bottom-right',
@@ -86,27 +89,27 @@ const MainContainer = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      })
+      });
     }
-  }
+  };
 
   useEffect(() => {
-    const result = grossWeight * law
-    setFine(result)
-  }, [grossWeight, law])
+    const result = grossWeight * law;
+    setFine(result);
+  }, [grossWeight, law]);
 
   return (
     <div>
       <div>
         <h1>Material</h1>
-        <div className='container'>
+        <div className="container">
           <Divweight>
             <label>Peso Bruto:</label>
             <Divinput1>
               <InputCustom
-                onChange={e => inputFl(e, setGrossWeight)}
-                type='number'
-                placeholder='Ingrese el Peso Bruto'
+                onChange={(e) => inputFl(e, setGrossWeight)}
+                type="number"
+                placeholder="Ingrese el Peso Bruto"
               />
             </Divinput1>
           </Divweight>
@@ -114,9 +117,9 @@ const MainContainer = () => {
             <label>Ley:</label>
             <Divinput2>
               <InputCustom
-                onChange={e => inputFl(e, setLaw)}
-                type='number'
-                placeholder='Ingrese Ley'
+                onChange={(e) => inputFl(e, setLaw)}
+                type="number"
+                placeholder="Ingrese Ley"
               />
             </Divinput2>
           </Divweight>
@@ -126,8 +129,8 @@ const MainContainer = () => {
               <InputCustom
                 value={fine}
                 disabled
-                type='number'
-                placeholder='Ingrese finos'
+                type="number"
+                placeholder="Ingrese finos"
               />
             </Divinput3>
           </Divweight>
@@ -136,14 +139,14 @@ const MainContainer = () => {
 
       <div>
         <h1>Rango de peso</h1>
-        <div className='container'>
+        <div className="container">
           <Divweight>
             <label>Peso inicial:</label>
             <Divinput1>
               <InputCustom
-                onChange={e => inputFl(e, setInitWeight)}
-                type='number'
-                placeholder='Ingrese el Peso Bruto'
+                onChange={(e) => inputFl(e, setInitWeight)}
+                type="number"
+                placeholder="Ingrese el Peso Bruto"
               />
             </Divinput1>
           </Divweight>
@@ -151,9 +154,9 @@ const MainContainer = () => {
             <label>Peso final: </label>
             <Divinput4>
               <InputCustom
-                onChange={e => inputFl(e, setLastWeight)}
-                type='number'
-                placeholder='Ingrese Ley'
+                onChange={(e) => inputFl(e, setLastWeight)}
+                type="number"
+                placeholder="Ingrese Ley"
               />
             </Divinput4>
           </Divweight>
@@ -161,24 +164,24 @@ const MainContainer = () => {
             <label>Rango de Ley 998: </label>
             <Divinput4>
               <InputCustom
-                onChange={e => inputFl(e, setRange)}
-                type='range'
-                min='0'
-                max='1'
-                step='0.25'
+                onChange={(e) => inputFl(e, setRange)}
+                type="range"
+                min="0"
+                max="1"
+                step="0.25"
               />
               {range}
             </Divinput4>
           </Divweight>
         </div>
       </div>
-      <Btnresult type='button' onClick={() => validate()}>
+      <Btnresult type="button" onClick={() => validate()}>
         Obtener resultados
       </Btnresult>
 
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default withRouter(MainContainer)
+export default withRouter(MainContainer);

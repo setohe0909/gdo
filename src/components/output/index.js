@@ -1,7 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useAtom } from 'jotai';
+
+import { grAtom } from '../../atoms';
+
 import Table from './table';
 
-import { Container } from './styles';
+import { Container, OutputStl, EmptyState } from './styles';
 
 const Output = () => {
   const columns = useMemo(
@@ -42,7 +46,7 @@ const Output = () => {
     []
   );
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useAtom(grAtom.dataInfo);
   const [skipPageReset, setSkipPageReset] = useState(false);
 
   const updateMyData = (rowIndex, columnId, value) => {
@@ -61,14 +65,24 @@ const Output = () => {
   };
 
   return (
-    <Container>
-      <Table
-        columns={columns}
-        data={data}
-        updateMyData={updateMyData}
-        skipPageReset={skipPageReset}
-      />
-    </Container>
+    <OutputStl>
+      {data.length === 0 ? (
+        <EmptyState>
+          Por favor diligenciar la informacion para obtener los resultados
+        </EmptyState>
+      ) : (
+        <>
+          <Container>
+            <Table
+              columns={columns}
+              data={data}
+              updateMyData={updateMyData}
+              skipPageReset={skipPageReset}
+            />
+          </Container>
+        </>
+      )}
+    </OutputStl>
   );
 };
 
