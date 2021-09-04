@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { grAtom } from '../../atoms';
+import { divGr } from '../../utils/func';
 
 import {
   Divweight,
@@ -26,12 +27,10 @@ const MainContainer = () => {
 
   const [, setdDtaInfo] = useAtom(grAtom.dataInfo);
 
-  const randomBetween = (min, max) => {
-    if (min < 0) {
-      return min + Math.random() * (Math.abs(min) + max);
-    } else {
-      return min + Math.random() * max;
-    }
+  const randomBetween = (min, max, decimalPlaces) => {
+    const randomValue = Math.random() * (max - min) + min;
+
+    return +randomValue.toFixed(decimalPlaces) * 1;
   };
 
   const validate = () => {
@@ -56,15 +55,21 @@ const MainContainer = () => {
       const divideRange = grossWeight / initWeight;
       let outputArray = new Array(Math.round(divideRange)).fill('');
 
+      const divGrResult = divGr(
+        +grossWeight,
+        +divideRange,
+        outputArray,
+        +lastWeight
+      );
+
       outputArray = outputArray.map((_item, index) => {
-        const gr = randomBetween(initWeight, lastWeight);
-        const law = randomBetween(0.0, 0.999);
+        const law = randomBetween(0.0, 0.999, 3);
 
         return {
           id: index + 1,
-          gr: parseInt(gr).toFixed(2),
-          law: parseInt(law).toFixed(2),
-          fine: gr * law,
+          gr: divGrResult[index],
+          law,
+          fine: (divGrResult[index] * law).toFixed(2),
         };
       });
 
