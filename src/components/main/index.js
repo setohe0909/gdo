@@ -14,6 +14,7 @@ import {
   Divinput4,
   Btnresult,
   InputCustom,
+  RangeInput,
 } from './styles';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -165,7 +166,7 @@ const MainContainer = () => {
               />
             </Divinput4>
           </Divweight>
-          <Divweight>
+          <RangeInput>
             <label>Rango de Ley 998: </label>
             <Divinput4>
               <InputCustom
@@ -177,7 +178,7 @@ const MainContainer = () => {
               />
               {range}
             </Divinput4>
-          </Divweight>
+          </RangeInput>
         </div>
       </div>
       <Btnresult type="button" onClick={() => validate()}>

@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-import colors from '../colors'
+import colors from '../colors';
 
 export const Containermain = styled.div`
   display: flex;
@@ -14,14 +14,20 @@ export const Containermain = styled.div`
   border-radius: 8px;
   padding: 1em;
   width: 80%;
-  height: 28em;
+  height: auto;
   margin: 40px auto;
   padding: 30px;
-`
+`;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-`
+
+  @media only screen and (max-width: 1300px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+`;

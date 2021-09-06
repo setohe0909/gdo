@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
 
 import { grAtom } from '../../atoms';
@@ -8,61 +8,30 @@ import Table from './table';
 import { Container, OutputStl, EmptyState } from './styles';
 
 const Output = () => {
-  const columns = useMemo(
-    () => [
-      {
-        Header: 'Material',
-        Footer: '',
-        columns: [
-          {
-            Header: 'Porcion',
-            accessor: 'id',
-            Footer: 'Totales',
-          },
-          {
-            Header: 'Gramos',
-            accessor: 'gr',
-            Footer: (info) => {
-              return <>123</>;
-            },
-          },
-          {
-            Header: 'Ley',
-            accessor: 'law',
-            Footer: (info) => {
-              return <>123</>;
-            },
-          },
-          {
-            Header: 'Finos',
-            accessor: 'fine',
-            Footer: (info) => {
-              return <>123</>;
-            },
-          },
-        ],
-      },
-    ],
-    []
-  );
+  const columns = [
+    {
+      name: 'Porcion',
+      selector: 'id',
+      sortable: true,
+    },
+    {
+      name: 'Gramos',
+      selector: 'gr',
+      sortable: true,
+    },
+    {
+      name: 'Ley',
+      selector: 'law',
+      sortable: true,
+    },
+    {
+      name: 'Finos',
+      selector: 'fine',
+      sortable: true,
+    },
+  ];
 
-  const [data, setData] = useAtom(grAtom.dataInfo);
-  const [skipPageReset, setSkipPageReset] = useState(false);
-
-  const updateMyData = (rowIndex, columnId, value) => {
-    setSkipPageReset(true);
-    setData((old) =>
-      old.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...old[rowIndex],
-            [columnId]: value,
-          };
-        }
-        return row;
-      })
-    );
-  };
+  const [data] = useAtom(grAtom.dataInfo);
 
   return (
     <OutputStl>
@@ -73,12 +42,7 @@ const Output = () => {
       ) : (
         <>
           <Container>
-            <Table
-              columns={columns}
-              data={data}
-              updateMyData={updateMyData}
-              skipPageReset={skipPageReset}
-            />
+            <Table columns={columns} data={data} />
           </Container>
         </>
       )}

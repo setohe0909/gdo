@@ -14,9 +14,9 @@ export const EmptyState = styled.div`
 `;
 
 export const OutputStl = styled.div`
-  width: 50%;
+  width: 65%;
   background: ${colors.whiteDark};
-  height: 80%;
+  height: auto;
   margin-top: 20px;
   padding: 10px;
   border-radius: 8px;
