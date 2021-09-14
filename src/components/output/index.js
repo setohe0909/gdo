@@ -1,11 +1,13 @@
-import React from 'react';
-import { useAtom } from 'jotai';
+import React from 'react'
+import { useAtom } from 'jotai'
 
-import { grAtom } from '../../atoms';
+import { grAtom } from '../../atoms'
 
-import Table from './table';
+import Table from './table'
 
-import { Container, OutputStl, EmptyState } from './styles';
+
+import { Container, OutputStl, EmptyState} from './styles'
+import Total from './total'
 
 const Output = () => {
   const columns = [
@@ -29,9 +31,11 @@ const Output = () => {
       selector: 'fine',
       sortable: true,
     },
-  ];
+   
+  ]
 
-  const [data] = useAtom(grAtom.dataInfo);
+  const [data] = useAtom(grAtom.dataInfo)
+  const [dataTotal] = useAtom(grAtom.totals)
 
   return (
     <OutputStl>
@@ -42,12 +46,13 @@ const Output = () => {
       ) : (
         <>
           <Container>
-            <Table columns={columns} data={data} />
+              <Table columns={columns} data={data} />
+              <Total data={dataTotal}/>
           </Container>
         </>
       )}
     </OutputStl>
-  );
-};
+  )
+}
 
-export default Output;
+export default Output

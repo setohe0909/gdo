@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-import colors from '../../colors';
+import colors from '../../colors'
 
 export const EmptyState = styled.div`
   width: 80%;
@@ -11,7 +11,7 @@ export const EmptyState = styled.div`
   margin: 16vh auto;
   text-align: center;
   font-weight: 600;
-`;
+`
 
 export const OutputStl = styled.div`
   width: 65%;
@@ -20,7 +20,7 @@ export const OutputStl = styled.div`
   margin-top: 20px;
   padding: 10px;
   border-radius: 8px;
-`;
+`
 
 export const Container = styled.div`
   padding: 1rem;
@@ -60,4 +60,15 @@ export const Container = styled.div`
   .pagination {
     padding: 0.5rem;
   }
-`;
+`
+
+export const ArrayTotal = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: -80px;
+`
+export const SpanT = styled.span`
+    margin-top: 20px
+`
