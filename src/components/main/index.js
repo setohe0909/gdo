@@ -33,8 +33,8 @@ const MainContainer = () => {
   const [, setdDtaInfo] = useAtom(grAtom.dataInfo);
   const [, setTotals] = useAtom(grAtom.totals);
   const [, setTotalLaw] = useAtom(grAtom.totalLaw);
-  const avarageMinLaw = +law - 0.005;
 
+  const avarageMinLaw = +law - 0.045;
   const avarageMaxLaw = +law + 0.01;
 
   const randomBetween = (min, max, decimalPlaces) => {
@@ -73,14 +73,34 @@ const MainContainer = () => {
         +lastWeight
       );
 
-      outputArray = outputArray.map((_current, index) => {
-        const law = randomBetween(avarageMinLaw, avarageMaxLaw < 0.998, 3);
+      let fineSum = 0;
+      let grSum = 0;
+      outputArray = outputArray
+        .map((_current, index) => {
+          const law = randomBetween(avarageMinLaw, avarageMaxLaw, 3);
+          fineSum = fineSum + +(divGrResult[index] * law).toFixed(3);
+
+          return {
+            id: index + 1,
+            gr: grSum > grossWeight ? null : +divGrResult[index],
+            law: +law,
+            fine:
+              fineSum > fine ? null : +(divGrResult[index] * law).toFixed(3),
+          };
+        })
+        .filter((item) => item.fine !== null);
+
+      outputArray = outputArray.map((item, _index) => {
+        debugger;
+        const sortItems = outputArray.sort((a, b) => {
+          return a.gr - b.gr;
+        });
+
+        const largest = sortItems[sortItems.length - 1].gr;
 
         return {
-          id: index + 1,
-          gr: +divGrResult[index],
-          law: +law,
-          fine: +(divGrResult[index] * law).toFixed(2),
+          ...item,
+          gr: +(item.gr + largest / outputArray.length).toFixed(3),
         };
       });
 
@@ -93,7 +113,6 @@ const MainContainer = () => {
       });
 
       setTotalLaw(law);
-
       setTotals(outputTotal);
       setdDtaInfo(outputArray);
     }
