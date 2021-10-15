@@ -4,7 +4,7 @@ export const divGr = (weight, bunch, array1, limit) => {
   let tempSum = 0;
 
   return array1.map((_items, index) => {
-    let sum = 0.012;
+    let sum = 0.004;
 
     if (temp === 0 && index === 0) {
       temp = initValue;

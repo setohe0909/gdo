@@ -79,6 +79,7 @@ const MainContainer = () => {
         .map((_current, index) => {
           const law = randomBetween(avarageMinLaw, avarageMaxLaw, 3);
           fineSum = fineSum + +(divGrResult[index] * law).toFixed(3);
+          grSum = grSum + +divGrResult[index];
 
           return {
             id: index + 1,
@@ -90,19 +91,28 @@ const MainContainer = () => {
         })
         .filter((item) => item.fine !== null);
 
-      outputArray = outputArray.map((item, _index) => {
-        debugger;
-        const sortItems = outputArray.sort((a, b) => {
-          return a.gr - b.gr;
-        });
+      grSum = 0;
+      outputArray = outputArray
+        .map((item, _index) => {
+          debugger;
+          grSum = grSum + +item.gr;
 
-        const largest = sortItems[sortItems.length - 1].gr;
+          const sortItems = outputArray.sort((a, b) => {
+            return a.gr - b.gr;
+          });
 
-        return {
-          ...item,
-          gr: +(item.gr + largest / outputArray.length).toFixed(3),
-        };
-      });
+          const largest = sortItems[sortItems.length - 1].gr;
+
+          if (grSum > grossWeight) {
+            item.gr = null;
+          }
+
+          return {
+            ...item,
+            gr: +(item.gr + largest / outputArray.length).toFixed(3),
+          };
+        })
+        .filter((item) => item.gr !== null);
 
       const outputTotal = outputArray.reduce((acc, current) => {
         return {
@@ -140,7 +150,7 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
-    const result = grossWeight * law;
+    const result = (grossWeight * law).toFixed(3);
     setFine(result);
   }, [grossWeight, law]);
 
