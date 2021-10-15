@@ -36,6 +36,7 @@ const Output = () => {
 
   const [data] = useAtom(grAtom.dataInfo)
   const [dataTotal] = useAtom(grAtom.totals)
+  const [lawTotal]=useAtom(grAtom.totalLaw)
 
   return (
     <OutputStl>
@@ -47,7 +48,7 @@ const Output = () => {
         <>
           <Container>
               <Table columns={columns} data={data} />
-              <Total data={dataTotal}/>
+              <Total data={dataTotal} lawt={lawTotal }/>
           </Container>
         </>
       )}
